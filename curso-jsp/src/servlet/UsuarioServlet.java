@@ -47,26 +47,26 @@ public class UsuarioServlet extends HttpServlet {
 			String acao = request.getParameter("acao");
 			String user = request.getParameter("user");
 
-			if (acao !=null && acao.equalsIgnoreCase("delete") && user != null) {
+			if (acao != null && acao.equalsIgnoreCase("delete") && user != null) {
 				daoUsuario.delete(user);
 				RequestDispatcher view = request.getRequestDispatcher("cadastroUsuario.jsp");
 				request.setAttribute("usuarios", daoUsuario.listarTodos());
 				request.setAttribute("mensagem", "Usuario deletado com sucesso");
 				view.forward(request, response);
 
-			} else if (acao !=null && acao.equalsIgnoreCase("editar") && user != null) {
+			} else if (acao != null && acao.equalsIgnoreCase("editar") && user != null) {
 
 				BeanCursoJsp beanCursoJsp = daoUsuario.consultar(user);
 				RequestDispatcher view = request.getRequestDispatcher("cadastroUsuario.jsp");
 				request.setAttribute("user", beanCursoJsp);
 				view.forward(request, response);
 
-			} else if (acao !=null && acao.equalsIgnoreCase("listar") && user != null) {
+			} else if (acao != null && acao.equalsIgnoreCase("listar") && user != null) {
 				RequestDispatcher view = request.getRequestDispatcher("cadastroUsuario.jsp");
 				request.setAttribute("usuarios", daoUsuario.listarTodos());
 				view.forward(request, response);
 
-			} else if (acao !=null && acao.equalsIgnoreCase("download") && user != null) {
+			} else if (acao != null && acao.equalsIgnoreCase("download") && user != null) {
 				BeanCursoJsp usuario = daoUsuario.consultar(user); // COnsulta o id do usuario no banco
 				if (usuario != null) { // verifica se nao está null
 
@@ -157,57 +157,63 @@ public class UsuarioServlet extends HttpServlet {
 
 			try {
 
-		/* ---------------  Início do File Upload de imagens e PDF ----------------------*/
+				/*
+				 * --------------- Início do File Upload de imagens e PDF ----------------------
+				 */
 
 				if (ServletFileUpload.isMultipartContent(request)) {
 
-		/*---------------------- Pega o parâmetro foto na tela pelo request. Ele busca o atributo name --------------*/
+					/*---------------------- Pega o parâmetro foto na tela pelo request. Ele busca o atributo name --------------*/
 					Part imagemFoto = request.getPart("foto");
 
-		/*---------------- Veririca se o campo foto tem o arquivo, se tiver, ele entra no IF--------------*/
+					/*---------------- Veririca se o campo foto tem o arquivo, se tiver, ele entra no IF--------------*/
 					if (imagemFoto != null && imagemFoto.getInputStream().available() > 0) {
-						
-		/*Convertendo a imagem em bytes*/
-						byte[] bytesImagem = converteStreamParaByte(imagemFoto.getInputStream());
 
-		/*Atribuindo os bytes para a variavel String fotoBase64*/
-						String fotoBase64 = new Base64().encodeBase64String(bytesImagem);
+						/* Convertendo a imagem em bytes */
 
-		/*--------------- Salvando as informações nos atributos bean. Dados salvos em String-----------------*/
-		/*-----------------Salvando o "nome" da imagem-----------------*/
+						/* Atribuindo os bytes para a variavel String fotoBase64 */
+						String fotoBase64 = new Base64()
+								.encodeBase64String(converteStreamParaByte(imagemFoto.getInputStream()));
+
+						/*--------------- Salvando as informações nos atributos bean. Dados salvos em String-----------------*/
+						/*-----------------Salvando o "nome" da imagem-----------------*/
 						usuario.setFotoBase64(fotoBase64);
-						
-		/*-----------------Salvando o "tipo de conteúdo" da imagem (JPEG, PNG, etc)-----------------*/
+
+						/*-----------------Salvando o "tipo de conteúdo" da imagem (JPEG, PNG, etc)-----------------*/
 						usuario.setContentType(imagemFoto.getContentType());
-						
-		/*-----------------Convertendo imagem em miniatura
-		  -----------------Transformando a imagem em um bufferImage-----------------*/
-						BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytesImagem));
-						
-		/* -----------------Pega o tipo da imagem 
-		   -----------------o gettype retora um inteiro. Se for igual a 0 ele atribui um valor padrão o ARGB, se não, ele atribui
-		   -----------------o valor do gettype da imagem. -----------------*/
-						
+
+						/*-----------------Convertendo imagem em miniatura
+						  -----------------Transformando a imagem em um bufferImage-----------------*/
+
+						byte[] imageBytesDecode = new Base64().decodeBase64(fotoBase64);
+
+						BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageBytesDecode));
+
+						/*
+						 * -----------------Pega o tipo da imagem -----------------o gettype retora um
+						 * inteiro. Se for igual a 0 ele atribui um valor padrão o ARGB, se não, ele
+						 * atribui -----------------o valor do gettype da imagem. -----------------
+						 */
+
 						int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
-						
-		/*-----------------Cria imagem em miniatura-----------------*/
+
+						/*-----------------Cria imagem em miniatura-----------------*/
 						BufferedImage resizadeImage = new BufferedImage(100, 100, type);
 						Graphics2D g = resizadeImage.createGraphics();
-						g.drawImage(resizadeImage, 0, 0, 100, 100, null);
-						
-		/*-----------------Escrever a imagem novamente-----------------*/
+						g.drawImage(bufferedImage, 0, 0, 100, 100, null);
+						g.dispose();
+
+						/*-----------------Escrever a imagem novamente-----------------*/
 						ByteArrayOutputStream baos = new ByteArrayOutputStream();
 						ImageIO.write(resizadeImage, "png", baos);
-						
-						String miniaturaBase64 = "data:image/png;base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
+
+						String miniaturaBase64 = "data:image/png;base64,"
+								+ DatatypeConverter.printBase64Binary(baos.toByteArray());
 
 						usuario.setFotoBase64Miniatura(miniaturaBase64);
-						
-		/*---------------------------------- Fim da conversão da imagem em miniatura----------------------------------*/
-						
-						
-						
-						
+
+						/*---------------------------------- Fim da conversão da imagem em miniatura----------------------------------*/
+
 					} else {
 						usuario.setFotoBase64(request.getParameter("fotoTemp"));
 						usuario.setContentType(request.getParameter("contentTypeTemp"));
@@ -223,7 +229,7 @@ public class UsuarioServlet extends HttpServlet {
 
 						usuario.setCurriculoBase64(curriculoBase64);
 						usuario.setContentTypeCurriculo(curriculoPdf.getContentType());
-					}else {
+					} else {
 						usuario.setCurriculoBase64(request.getParameter("curriculoTemp"));
 						usuario.setContentTypeCurriculo(request.getParameter("contentTypeCurriculoTemp"));
 					}
