@@ -50,7 +50,7 @@ public class DaoUsuario {
 	public ArrayList<BeanCursoJsp> listarTodos() throws Exception {
 		ArrayList<BeanCursoJsp> listar = new ArrayList<BeanCursoJsp>();// Instancio uma lista de objetos BeanCurso
 
-		String sql = "select * from usuario"; // Monto a sql
+		String sql = "select * from usuario where login <> 'admin'"; // Monto a sql
 
 		PreparedStatement list = connection.prepareStatement(sql); // preparo a sql e mando para o "list";
 		ResultSet resultSet = list.executeQuery();// ResultSet é o resultado da query; Executo o sql e guardo no
@@ -87,7 +87,7 @@ public class DaoUsuario {
 
 	public void delete(String id) {
 		try {
-			String sql = "delete from usuario where id = '" + id + "'";
+			String sql = "delete from usuario where id = '" + id + "' and login <> 'admin'";
 			PreparedStatement deletar = connection.prepareStatement(sql);
 			deletar.execute();
 			connection.commit();
@@ -104,7 +104,7 @@ public class DaoUsuario {
 	}
 
 	public BeanCursoJsp consultar(String id) throws SQLException {
-		String sql = "select * from usuario where id = '" + id + "'"; // Verificar se o login que esta no banco é o
+		String sql = "select * from usuario where id = '" + id + "' and login <> 'admin'"; // Verificar se o login que esta no banco é o
 																		// mesmo login que está vindo por parâmetro do
 																		// // getParameter do Servlet
 

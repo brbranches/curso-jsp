@@ -207,24 +207,24 @@
 	</div>
 
 	<script type="text/javascript">
-		function validarCampos() {
-			if (document.getElementById("login").value == '') && (document.getElementByid("salvar")) {
-				alert('Informe o login!');
-				return false
-			}
+// 		function validarCampos() {
+// 			if (document.getElementById("login").value == '') {
+// 				alert('Informe o login!');
+// 				return false
+// 			}
 
-			else if (document.getElementById("senha").value == '') && (document.getElementByid("salvar")) {
-				alert('Informe a senha!');
-				return false
-			}
+// 			else if (document.getElementById("senha").value == ''){
+// 				alert('Informe a senha!');
+// 				return false
+// 			}
 
-			else if (document.getElementById("nome").value == '') && (document.getElementByid("salvar")) {
-				alert('Informe o nome!');
-				return false
-			}
+// 			else if (document.getElementById("nome").value == '') {
+// 				alert('Informe o nome!');
+// 				return false
+// 			}
 
-			return true;
-		}
+// 			return true;
+// 		}
 
 		function consultaCep() {
 			var cep = $("#cep").val();
