@@ -72,7 +72,8 @@ public class DaoUsuario {
 			beanCursoJsp.setCidade(resultSet.getString("cidade"));
 			beanCursoJsp.setUf(resultSet.getString("uf"));
 			beanCursoJsp.setIbge(resultSet.getString("ibge"));
-			beanCursoJsp.setFotoBase64(resultSet.getString("fotobase64"));
+//			beanCursoJsp.setFotoBase64(resultSet.getString("fotobase64")); Nao precisa mais listar na hora de carregar na tela, só na hr do download
+			beanCursoJsp.setFotoBase64Miniatura(resultSet.getString("fotobase64miniatura"));
 			beanCursoJsp.setContentType(resultSet.getString("contenttype"));
 			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculobase64"));
 			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
@@ -132,6 +133,7 @@ public class DaoUsuario {
 			beanCursoJsp.setUf(resultSet.getString("uf"));
 			beanCursoJsp.setIbge(resultSet.getString("ibge"));
 			beanCursoJsp.setFotoBase64(resultSet.getString("fotobase64"));
+			beanCursoJsp.setFotoBase64(resultSet.getString("fotobase64miniatura"));
 			beanCursoJsp.setContentType(resultSet.getString("contenttype"));
 			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculobase64"));
 			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));

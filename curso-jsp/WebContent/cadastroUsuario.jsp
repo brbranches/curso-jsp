@@ -95,8 +95,9 @@
 						<td>Foto:</td>
 						<td><input type="file" name="foto" id="foto"> <input
 							type="text" style="display: none;" name="fotoTemp"
-							readonly="readonly" value="${user.fotoBase64}" /> <input
-							type="text" style="display: none;" name="contentTypeTemp"
+							readonly="readonly" value="${user.fotoBase64}" /> 
+							
+							<input type="text" style="display: none;" name="contentTypeTemp"
 							readonly="readonly" value="${user.contentType}" /></td>
 					</tr>
 
@@ -156,15 +157,13 @@
 						<td style="width: 80px"><C:out value="${user.id}"></C:out></td>
 						<td style="width: 80px"><C:out value="${user.login}"></C:out></td>
 
-						<C:if test="${user.fotoBase64.isEmpty() == false}">
-							<td style="width: 80px"><a
-								href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">
-									<img src='<C:out value="${user.tempFotoUser}"/>' width="25px"
+						<C:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
+							<td style="width: 80px"><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">		<img src='<C:out value="${user.fotoBase64Miniatura}"/>' width="25px"
 									height="25px;" />
 							</a></td>
 						</C:if>
 
-						<C:if test="${user.fotoBase64.isEmpty() == true}">
+						<C:if test="${user.fotoBase64Miniatura.isEmpty() == true}">
 							<td style="width: 80px"><img
 								src="resources/img/userpadrao_erro.png" width="25px" height="25px;" /></td>
 						</C:if>
