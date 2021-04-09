@@ -15,7 +15,7 @@
 
 	<h2>SEJA BEM-VINDO AO SISTEMA EM JSP</h2>
 
-	<table>
+	<center><table>
 		<tr>
 			<td><center><a href="salvarUsuario?acao=listar"> <img title="Adicionar usuário" src="resources/img/add_user.png" width="50px" height="50px;"></a></td> </center>
 			<td> </td>
@@ -38,6 +38,6 @@
 			<td> </td>
 			<td><a href="salvarProduto?acao=listar">[ Adicionar produto ]</a></td>
 		</tr>
-	</table>
+	</table></center>
 </body>
 </html>

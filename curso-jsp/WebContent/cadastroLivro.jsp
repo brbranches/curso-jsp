@@ -13,9 +13,9 @@
 </head>
 <body>
 
-<center> <a href="acessoliberado.jsp">Início</a>
+<a href="acessoliberado.jsp">Início</a>
 	<tr> | </tr>
-	<a href="index.jsp">Sair</a></center>
+	<a href="index.jsp">Sair</a>
 
 	<div class="form-style-10">
 		<h1>Cadastro de Livros</h1>

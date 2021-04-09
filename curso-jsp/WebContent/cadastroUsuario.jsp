@@ -157,13 +157,13 @@
 						<td style="width: 80px"><C:out value="${user.id}"></C:out></td>
 						<td style="width: 80px"><C:out value="${user.login}"></C:out></td>
 
-						<C:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
+						<C:if test="${user.fotoBase64Miniatura.isEmpty() != null}">
 							<td style="width: 80px"><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">		
 							<img src='<C:out value="${user.fotoBase64Miniatura}"/>' width="25px" height="25px;" />
 							</a></td>
 						</C:if>
 
-						<C:if test="${user.fotoBase64Miniatura.isEmpty() == true}">
+						<C:if test="${user.fotoBase64Miniatura.isEmpty() == null}">
 							<td style="width: 80px"><img
 								src="resources/img/userpadrao_erro.png" width="25px" height="25px;" /></td>
 						</C:if>

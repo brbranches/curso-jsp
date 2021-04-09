@@ -22,6 +22,8 @@
 
 <body>
 	<h2 class="titulo" > SISTEMA DE CADASTRO</h2>
+	<h4 class="subtitulo" > Projeto didático - JSP + Servlet + JDBC </h4>
+	
 
 	<div class="login-page">
 		<div class="form">

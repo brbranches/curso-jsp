@@ -27,7 +27,7 @@ public class ProdutoServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		try {
-			String acao = request.getParameter("acao");
+			String acao = request.getParameter("acao") != null? request.getParameter("acao") : "listar";
 			String product = request.getParameter("product");
 
 			if (acao.equalsIgnoreCase("delete")) {

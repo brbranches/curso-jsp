@@ -4,7 +4,7 @@
 
 .login-page {
 	width: 360px;
-	padding: 8% 0 0;
+	padding: 4% 0 0;
 	margin: auto;
 }
 
@@ -137,6 +137,15 @@ h2 {
 	color: #FFFFFF;
 	font-family: "Roboto", sans-serif;
 	font-size: 30px;
+	margin-top: 30px;
+	padding-bottom: -100px;
+}
+
+h4.subtitulo {
+	text-align: center;
+	color: #FFFFFF;
+	font-family: "Roboto", sans-serif;
+	font-size: 20px;
 	margin-top: 30px;
 	padding-bottom: -100px;
 }
