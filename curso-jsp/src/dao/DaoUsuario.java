@@ -33,11 +33,14 @@ public class DaoUsuario {
 			insert.setString(8, usuario.getCidade());
 			insert.setString(9, usuario.getUf());
 			insert.setString(10, usuario.getIbge());
+
 			insert.setString(11, usuario.getFotoBase64());
 			insert.setString(12, usuario.getContentType());
+			insert.setString(15, usuario.getFotoBase64Miniatura());
+
 			insert.setString(13, usuario.getCurriculoBase64());
 			insert.setString(14, usuario.getContentTypeCurriculo());
-			insert.setString(15, usuario.getFotoBase64Miniatura());
+
 			insert.execute();
 			connection.commit();
 		} catch (SQLException e) {
@@ -104,9 +107,10 @@ public class DaoUsuario {
 	}
 
 	public BeanCursoJsp consultar(String id) throws SQLException {
-		String sql = "select * from usuario where id = '" + id + "' and login <> 'admin'"; // Verificar se o login que esta no banco é o
-																		// mesmo login que está vindo por parâmetro do
-																		// // getParameter do Servlet
+		String sql = "select * from usuario where id = '" + id + "' and login <> 'admin'"; // Verificar se o login que
+																							// esta no banco é o
+		// mesmo login que está vindo por parâmetro do
+		// // getParameter do Servlet
 
 		PreparedStatement consultar = connection.prepareStatement(sql); // Preparo a SQL e passo para o editar
 		ResultSet resultSet = consultar.executeQuery(); // jogo o resultado da query para o resultset
@@ -138,7 +142,6 @@ public class DaoUsuario {
 			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculobase64"));
 			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
 
-			
 			return beanCursoJsp; // Retorno o objeto setado
 		}
 		return null;
@@ -216,11 +219,30 @@ public class DaoUsuario {
 	}
 
 	public void atualizar(BeanCursoJsp usuario) {
-		try {
-			String sql = "update usuario set login = ?, senha = ?, nome = ?, telefone = ?, cep = ?, rua = ?, bairro = ?, cidade = ?, "
-					+ "uf = ?, ibge = ?, fotobase64 = ?, contenttype = ?, curriculobase64 = ?, contenttypecurriculo = ?, fotobase64miniatura = ? where id= '" + usuario.getId() + "'";
 
-			PreparedStatement update = connection.prepareStatement(sql);
+		try {
+			
+			StringBuilder sql = new StringBuilder();
+
+			sql.append(" update usuario set login = ?, senha = ?, nome = ?, telefone = ? ");
+			sql.append(" ,cep = ?, rua = ?, bairro = ?, cidade = ? ");
+			sql.append(" ,uf = ?, ibge = ? ");
+
+			if (usuario.isAtualizarImagem()) {
+				sql.append(" ,fotobase64 = ?, contenttype = ? ");
+			}
+
+			if (usuario.isAtualizarPdf()) {
+				sql.append(" ,curriculobase64 = ?, contenttypecurriculo = ? ");
+			}
+
+			if (usuario.isAtualizarImagem()) {
+				sql.append(" ,fotobase64miniatura = ? ");
+			}
+
+			sql.append(" where id= " + usuario.getId());
+
+			PreparedStatement update = connection.prepareStatement(sql.toString());
 			update.setString(1, usuario.getLogin());
 			update.setString(2, usuario.getSenha());
 			update.setString(3, usuario.getNome());
@@ -231,11 +253,32 @@ public class DaoUsuario {
 			update.setString(8, usuario.getCidade());
 			update.setString(9, usuario.getUf());
 			update.setString(10, usuario.getIbge());
-			update.setString(11, usuario.getFotoBase64());
-			update.setString(12, usuario.getContentType());
-			update.setString(13, usuario.getCurriculoBase64());
-			update.setString(14, usuario.getContentTypeCurriculo());
-			update.setString(15, usuario.getFotoBase64Miniatura());
+
+			if (usuario.isAtualizarImagem()) {
+				update.setString(11, usuario.getFotoBase64());
+				update.setString(12, usuario.getContentType());
+			}
+
+			if (usuario.isAtualizarPdf()) {
+				
+				if (usuario.isAtualizarPdf() && !usuario.isAtualizarImagem()) {
+					
+					update.setString(11, usuario.getCurriculoBase64());
+					update.setString(12, usuario.getContentTypeCurriculo());
+				}else {
+					update.setString(13, usuario.getCurriculoBase64());
+					update.setString(14, usuario.getContentTypeCurriculo());
+				}
+				
+				
+			} else {
+				if (usuario.isAtualizarImagem()) {
+					update.setString(13, usuario.getFotoBase64Miniatura());
+				}
+			}
+			if (usuario.isAtualizarImagem() && usuario.isAtualizarPdf()) {
+				update.setString(15, usuario.getFotoBase64Miniatura());
+			}
 
 			update.executeUpdate();
 			connection.commit();

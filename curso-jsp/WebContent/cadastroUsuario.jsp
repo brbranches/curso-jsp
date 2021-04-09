@@ -93,22 +93,12 @@
 
 					<tr>
 						<td>Foto:</td>
-						<td><input type="file" name="foto" id="foto"> <input
-							type="text" style="display: none;" name="fotoTemp"
-							readonly="readonly" value="${user.fotoBase64}" /> 
-							
-							<input type="text" style="display: none;" name="contentTypeTemp"
-							readonly="readonly" value="${user.contentType}" /></td>
+						<td><input type="file" name="foto" id="foto"></td>
 					</tr>
 
 					<tr>
 						<td>Currículo:</td>
-						<td><input type="file" name="curriculo" id="curriculo"
-							value="Curriculo"> <input type="text"
-							style="display: none;" name="curriculoTemp" readonly="readonly"
-							value="${user.curriculoBase64}" /> <input type="text"
-							style="display: none;" name="contentTypeCurriculoTemp"
-							readonly="readonly" value="${user.contentTypeCurriculo}" /></td>
+						<td><input type="file" name="curriculo" id="curriculo" value="Curriculo"></td> 
 					</tr>
 
 					<tr>
@@ -157,15 +147,15 @@
 						<td style="width: 80px"><C:out value="${user.id}"></C:out></td>
 						<td style="width: 80px"><C:out value="${user.login}"></C:out></td>
 
-						<C:if test="${user.fotoBase64Miniatura.isEmpty() != null}">
+						<C:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
 							<td style="width: 80px"><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">		
 							<img src='<C:out value="${user.fotoBase64Miniatura}"/>' width="25px" height="25px;" />
 							</a></td>
 						</C:if>
 
-						<C:if test="${user.fotoBase64Miniatura.isEmpty() == null}">
+						<C:if test="${user.fotoBase64Miniatura == null}">
 							<td style="width: 80px"><img
-								src="resources/img/userpadrao_erro.png" width="25px" height="25px;" /></td>
+								src="resources/img/userpadrao_erro.png" width="23px" height="23px;" /></td>
 						</C:if>
 
 
@@ -176,7 +166,7 @@
 							</a></td>
 						</C:if>
 						
-						<C:if test="${user.curriculoBase64.isEmpty() == true}">
+						<C:if test="${user.curriculoBase64 == null}">
 							<td style="width: 80px"><img src="resources/img/pdf_erro.png" width="25px" height="25px;" /></td>
 						</C:if>
 						
