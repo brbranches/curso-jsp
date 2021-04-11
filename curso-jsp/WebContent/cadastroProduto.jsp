@@ -49,13 +49,13 @@
 
 					<tr>
 						<td>Quantidade</td>
-						<td><input type="number" id="quantidade" name="quantidade"
+						<td><input type="text" id="quantidade" maxlength="7" name="quantidade"
 							value="${product.quantidade}"></td>
 					</tr>
 
 					<tr>
 						<td>Preço R$</td>
-						<td><input type="text" id="preco" name="preco"
+						<td><input type="text" id="preco" maxlength="8" name="preco"
 							data-thousands="." data-decimal=","
 							value="${product.precoEmTexto}"></td>
 					</tr>
@@ -126,7 +126,14 @@
 <script>
 	$(function() {
 		$('#preco').maskMoney();
-	})
+	});
+	
+	
+	$(document).ready(function() {
+		  $("#quantidade").keyup(function() {
+		      $("#quantidade").val(this.value.match(/[0-9]*/));
+		  });
+		});
 </script>
 
 </html>
