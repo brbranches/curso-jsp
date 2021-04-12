@@ -183,7 +183,7 @@
 								title="Editar" src="resources/img/editar.png" width="20px"
 								height="20px;"> </a></td>
 
-						<td><a href="salvarUsuario?acao=delete&user=${user.id}"><img
+						<td><a href="salvarUsuario?acao=delete&user=${user.id}"  onclick=" return confirm('Deseja mesmo remover?')"><img
 								title="Excluir" src="resources/img/excluir.png" width="20px"
 								height="20px;"> </a></td>
 
@@ -191,12 +191,14 @@
 								title="Telefone" src="resources/img/telefone.png" width="20px"
 								height="20px;"> </a></td>
 					</tr>
+					
 				</C:forEach>
 			</table>
 		</div>
 	</div>
 
 	<script type="text/javascript">
+
 // 		function validarCampos() {
 // 			if (document.getElementById("login").value == '') {
 // 				alert('Informe o login!');

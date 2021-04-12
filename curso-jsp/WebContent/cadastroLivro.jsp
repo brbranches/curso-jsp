@@ -103,7 +103,7 @@
 						<td><a href="salvarLivro?acao=editar&livro=${livro.id}"><img
 								title="Editar" src="resources/img/editar.png" width="20px"
 								height="20px;"> </a></td>
-						<td><a href="salvarLivro?acao=delete&livro=${livro.id}"><img
+						<td><a href="salvarLivro?acao=delete&livro=${livro.id}" onclick=" return confirm('Deseja mesmo remover?')"><img
 								title="Excluir" src="resources/img/excluir.png" width="20px"
 								height="20px;"> </a></td>
 					</tr>

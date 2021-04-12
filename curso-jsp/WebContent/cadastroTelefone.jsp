@@ -101,7 +101,7 @@
 						<td style="width: 80px"><C:out value="${fone.numero}"></C:out></td>
 						<td style="width: 80px"><C:out value="${fone.tipo}"></C:out></td>
 
-						<td><a href="salvarTelefone?user=${fone.usuario}&acao=delete&idFone=${fone.id}"><img
+						<td><a href="salvarTelefone?user=${fone.usuario}&acao=delete&idFone=${fone.id}"  onclick=" return confirm('Deseja mesmo remover?')"><img
 								title="Excluir" src="resources/img/excluir.png" width="20px"
 								height="20px;"> </a></td>
 						</a>

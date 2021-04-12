@@ -109,7 +109,7 @@
 								height="20px;"> </a></td>
 						
 						
-						<td><a href="salvarProduto?acao=delete&product=${product.id}"><img
+						<td><a href="salvarProduto?acao=delete&product=${product.id}" onclick=" return confirm('Deseja mesmo remover?')"><img
 								title="Excluir" src="resources/img/excluir.png" width="20px"
 								height="20px;"> </a></td>
 						
