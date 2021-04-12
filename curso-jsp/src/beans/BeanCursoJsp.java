@@ -19,8 +19,18 @@ public class BeanCursoJsp {
 	private String contentType;
 	private String contentTypeCurriculo;
 	private boolean ativo;
+	private String sexo;
 	
 	
+	
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
 	private boolean atualizarImagem = true;
 	private boolean atualizarPdf = true;
 	
