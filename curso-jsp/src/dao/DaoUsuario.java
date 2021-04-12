@@ -79,6 +79,7 @@ public class DaoUsuario {
 			beanCursoJsp.setContentType(resultSet.getString("contenttype"));
 			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculobase64"));
 			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
+			beanCursoJsp.setAtivo(resultSet.getBoolean("ativo"));
 
 			listar.add(beanCursoJsp); // Adiciono o objeto com os daodos já setados na lista.
 
@@ -140,7 +141,8 @@ public class DaoUsuario {
 			beanCursoJsp.setContentType(resultSet.getString("contenttype"));
 			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculobase64"));
 			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
-
+			beanCursoJsp.setAtivo(resultSet.getBoolean("ativo"));
+			
 			return beanCursoJsp; // Retorno o objeto setado
 		}
 		return null;
