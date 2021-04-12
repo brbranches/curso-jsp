@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="resources/css/cadastro.css">
 
 <!-- Adicionando JQuery -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	crossorigin="anonymous"></script>
 
 </head>
@@ -20,8 +21,8 @@
 	<a href="index.jsp">Sair</a>
 
 	<div class="form-style-10">
-		
-			<h1 align="center">Cadastro de Usuários</h1>
+
+		<h1 align="center">Cadastro de Usuários</h1>
 
 		<div class="section"></div>
 		<div class="inner-wrap">
@@ -94,18 +95,24 @@
 					<tr>
 						<td>Foto:</td>
 						<td><input type="file" name="foto" id="foto"></td>
+						
+						
+						<td>Ativo</td>
+						<td><input type="checkbox" name="ativo" id="ativo"></td>
+
 					</tr>
 
 					<tr>
 						<td>Currículo:</td>
-						<td><input type="file" name="curriculo" id="curriculo" value="Curriculo"></td> 
+						<td><input type="file" name="curriculo" id="curriculo"
+							value="Curriculo"></td>
 					</tr>
 
 					<tr>
 						<td></td>
-						<td>
-						<input type="submit" value="Salvar" id="salvar"> 
-						<input type="submit" value="Cancelar" id="cancelar" onclick="document.getElementById('formUser').action='salvarUsuario?acao=reset'">
+						<td><input type="submit" value="Salvar" id="salvar">
+							<input type="submit" value="Cancelar" id="cancelar"
+							onclick="document.getElementById('formUser').action='salvarUsuario?acao=reset'">
 						</td>
 
 					</tr>
@@ -148,14 +155,17 @@
 						<td style="width: 80px"><C:out value="${user.login}"></C:out></td>
 
 						<C:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
-							<td style="width: 80px"><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">		
-							<img src='<C:out value="${user.fotoBase64Miniatura}"/>' width="25px" height="25px;" />
+							<td style="width: 80px"><a
+								href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">
+									<img src='<C:out value="${user.fotoBase64Miniatura}"/>'
+									width="25px" height="25px;" />
 							</a></td>
 						</C:if>
 
 						<C:if test="${user.fotoBase64Miniatura == null}">
 							<td style="width: 80px"><img
-								src="resources/img/userpadrao_erro.png" width="23px" height="23px;" /></td>
+								src="resources/img/userpadrao_erro.png" width="23px"
+								height="23px;" /></td>
 						</C:if>
 
 
@@ -165,12 +175,13 @@
 									<img src="resources/img/pdf.png" width="25px" height="25px;" />
 							</a></td>
 						</C:if>
-						
+
 						<C:if test="${user.curriculoBase64 == null}">
-							<td style="width: 80px"><img src="resources/img/pdf_erro.png" width="25px" height="25px;" /></td>
+							<td style="width: 80px"><img
+								src="resources/img/pdf_erro.png" width="25px" height="25px;" /></td>
 						</C:if>
-						
-						
+
+
 						<td style="width: 80px"><C:out value="${user.nome}"></C:out></td>
 						<td style="width: 100px"><C:out value="${user.cep}"></C:out></td>
 						<td style="width: 250px"><C:out value="${user.rua}"></C:out></td>
@@ -183,7 +194,8 @@
 								title="Editar" src="resources/img/editar.png" width="20px"
 								height="20px;"> </a></td>
 
-						<td><a href="salvarUsuario?acao=delete&user=${user.id}"  onclick=" return confirm('Deseja mesmo remover?')"><img
+						<td><a href="salvarUsuario?acao=delete&user=${user.id}"
+							onclick=" return confirm('Deseja mesmo remover?')"><img
 								title="Excluir" src="resources/img/excluir.png" width="20px"
 								height="20px;"> </a></td>
 
@@ -191,32 +203,31 @@
 								title="Telefone" src="resources/img/telefone.png" width="20px"
 								height="20px;"> </a></td>
 					</tr>
-					
+
 				</C:forEach>
 			</table>
 		</div>
 	</div>
 
 	<script type="text/javascript">
+		// 		function validarCampos() {
+		// 			if (document.getElementById("login").value == '') {
+		// 				alert('Informe o login!');
+		// 				return false
+		// 			}
 
-// 		function validarCampos() {
-// 			if (document.getElementById("login").value == '') {
-// 				alert('Informe o login!');
-// 				return false
-// 			}
+		// 			else if (document.getElementById("senha").value == ''){
+		// 				alert('Informe a senha!');
+		// 				return false
+		// 			}
 
-// 			else if (document.getElementById("senha").value == ''){
-// 				alert('Informe a senha!');
-// 				return false
-// 			}
+		// 			else if (document.getElementById("nome").value == '') {
+		// 				alert('Informe o nome!');
+		// 				return false
+		// 			}
 
-// 			else if (document.getElementById("nome").value == '') {
-// 				alert('Informe o nome!');
-// 				return false
-// 			}
-
-// 			return true;
-// 		}
+		// 			return true;
+		// 		}
 
 		function consultaCep() {
 			var cep = $("#cep").val();

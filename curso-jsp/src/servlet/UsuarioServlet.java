@@ -141,6 +141,8 @@ public class UsuarioServlet extends HttpServlet {
 			String cidade = request.getParameter("cidade");
 			String uf = request.getParameter("uf");
 			String ibge = request.getParameter("ibge");
+			
+			System.out.println(request.getParameter("ativo"));
 
 			BeanCursoJsp usuario = new BeanCursoJsp();
 			usuario.setId(id != null && !id.isEmpty() ? Long.parseLong(id) : null);
@@ -154,6 +156,12 @@ public class UsuarioServlet extends HttpServlet {
 			usuario.setCidade(cidade);
 			usuario.setUf(uf);
 			usuario.setIbge(ibge);
+			
+			if (request.getParameter("ativo") != null && request.getParameter("ativo").equalsIgnoreCase("on")) {
+				usuario.setAtivo(true);
+			}else {
+				usuario.setAtivo(false);
+			}
 
 			try {
 
