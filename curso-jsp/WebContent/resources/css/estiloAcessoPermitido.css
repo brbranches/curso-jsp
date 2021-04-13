@@ -8,7 +8,15 @@
 	margin: auto;
 }
 
+.table{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
 .form {
+	text-align: center;
 	position: relative;
 	z-index: 1;
 	background: #FFFFFF;

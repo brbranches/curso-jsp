@@ -49,8 +49,8 @@
 
 					<tr>
 						<td>Quantidade</td>
-						<td><input type="text" id="quantidade" maxlength="7" name="quantidade"
-							value="${product.quantidade}"></td>
+						<td><input type="text" id="quantidade" maxlength="7"
+							name="quantidade" value="${product.quantidade}"></td>
 					</tr>
 
 					<tr>
@@ -60,6 +60,14 @@
 							value="${product.precoEmTexto}"></td>
 					</tr>
 
+					<tr>
+						<td>Categoria</td>
+						<td><select id="categorias" name="categoria_id">
+								<C:forEach items="${categorias}" var="categ">
+									<option value="${categ.id}" id="${categ.id}">${categ.nome}</option>
+								</C:forEach>
+						</select></td>
+					</tr>
 
 					<tr>
 						<td></td>
@@ -102,17 +110,19 @@
 						<td style="width: 150px"><C:out value="${product.id}"></C:out></td>
 						<td style="width: 150px"><C:out value="${product.nome}"></C:out></td>
 						<td><C:out value="${product.quantidade}"></C:out></td>
-						<td style="width: 150px"><fmt:formatNumber type="number" maxFractionDigits="2" value="${product.preco}"/></td> 
+						<td style="width: 150px"><fmt:formatNumber type="number"
+								maxFractionDigits="2" value="${product.preco}" /></td>
 
 						<td><a href="salvarProduto?acao=editar&product=${product.id}"><img
 								title="Editar" src="resources/img/editar.png" width="20px"
 								height="20px;"> </a></td>
-						
-						
-						<td><a href="salvarProduto?acao=delete&product=${product.id}" onclick=" return confirm('Deseja mesmo remover?')"><img
+
+
+						<td><a href="salvarProduto?acao=delete&product=${product.id}"
+							onclick=" return confirm('Deseja mesmo remover?')"><img
 								title="Excluir" src="resources/img/excluir.png" width="20px"
 								height="20px;"> </a></td>
-						
+
 					</tr>
 				</C:forEach>
 
@@ -127,13 +137,12 @@
 	$(function() {
 		$('#preco').maskMoney();
 	});
-	
-	
+
 	$(document).ready(function() {
-		  $("#quantidade").keyup(function() {
-		      $("#quantidade").val(this.value.match(/[0-9]*/));
-		  });
+		$("#quantidade").keyup(function() {
+			$("#quantidade").val(this.value.match(/[0-9]*/));
 		});
+	});
 </script>
 
 </html>

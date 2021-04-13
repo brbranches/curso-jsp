@@ -27,28 +27,26 @@ public class ProdutoServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		try {
-			String acao = request.getParameter("acao") != null? request.getParameter("acao") : "listar";
+			String acao = request.getParameter("acao") != null ? request.getParameter("acao") : "listar";
 			String product = request.getParameter("product");
+
+			RequestDispatcher view = request.getRequestDispatcher("cadastroProduto.jsp");
 
 			if (acao.equalsIgnoreCase("delete")) {
 				daoProduto.delete(product);
-				RequestDispatcher view = request.getRequestDispatcher("cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listarTodos());
 				request.setAttribute("mensagem", "Produto deletado com sucesso");
-				view.forward(request, response);
 
 			} else if (acao.equalsIgnoreCase("editar")) {
-
 				BeanProduto beanProduto = daoProduto.consultar(product);
-				RequestDispatcher view = request.getRequestDispatcher("cadastroProduto.jsp");
 				request.setAttribute("product", beanProduto);
-				view.forward(request, response);
 
 			} else if (acao.equalsIgnoreCase("listar")) {
-				RequestDispatcher view = request.getRequestDispatcher("cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listarTodos());
-				view.forward(request, response);
 			}
+
+			request.setAttribute("categorias", daoProduto.listaCategorias());
+			view.forward(request, response);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,21 +83,21 @@ public class ProdutoServlet extends HttpServlet {
 				}
 
 				if (preco != null && !preco.isEmpty()) {
-					String precoParse = preco.replaceAll("\\.", ""); //10.500,20
-					precoParse = precoParse.replaceAll("\\,", "."); //10500.20
-					produto.setPreco(Double.parseDouble(precoParse)); //10500.20
+					String precoParse = preco.replaceAll("\\.", ""); // 10.500,20
+					precoParse = precoParse.replaceAll("\\,", "."); // 10500.20
+					produto.setPreco(Double.parseDouble(precoParse)); // 10500.20
 				}
 
 				if (nome == null || nome.isEmpty()) {
 					request.setAttribute("mensagem", "O campo nome do produto é obrigatório!");
 					request.setAttribute("product", produto);
 				}
-				
+
 				else if (quantidade == null || quantidade.isEmpty()) {
 					request.setAttribute("mensagem", "O campo quantidade do produto é obrigatório!");
 					request.setAttribute("product", produto);
 				}
-				
+
 				else if (preco == null || preco.isEmpty()) {
 					request.setAttribute("mensagem", "O campo preço do produto é obrigatório!");
 					request.setAttribute("product", produto);
@@ -126,6 +124,7 @@ public class ProdutoServlet extends HttpServlet {
 
 				RequestDispatcher view = request.getRequestDispatcher("cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listarTodos());
+				request.setAttribute("categorias", daoProduto.listaCategorias());
 				view.forward(request, response);
 
 			} catch (Exception e) {
