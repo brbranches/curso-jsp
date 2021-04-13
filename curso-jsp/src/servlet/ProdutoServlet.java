@@ -72,11 +72,13 @@ public class ProdutoServlet extends HttpServlet {
 			String nome = request.getParameter("nome");
 			String quantidade = request.getParameter("quantidade");
 			String preco = request.getParameter("preco");
+			String categoria = request.getParameter("categoria_id");
 
 			BeanProduto produto = new BeanProduto();
 			produto.setId(!id.isEmpty() ? Long.parseLong(id) : null);
 			produto.setNome(nome);
-
+			produto.setCategoria_id(Long.parseLong(categoria)); //parseLong recebe uma string
+			
 			try {
 				if (quantidade != null && !quantidade.isEmpty()) {
 					produto.setQuantidade(Double.parseDouble(quantidade));
@@ -104,21 +106,23 @@ public class ProdutoServlet extends HttpServlet {
 				}
 
 				else if (id == null || id.isEmpty() && !daoProduto.validarProduto(nome)) {
-					request.setAttribute("mensagem",
-							"Produto já está cadastrado! Tente cadastrar um produto diferente");
+					request.setAttribute("mensagem", "Produto já está cadastrado! Tente cadastrar um produto diferente");
 					request.setAttribute("product", produto);
 
 				} else if (id == null || id.isEmpty() && daoProduto.validarProduto(nome)) {
+					
 					daoProduto.salvarProduto(produto);
+					
 					request.setAttribute("mensagem", "Produto cadastrado com sucesso");
 
 				} else if (id != null && !id.isEmpty() && !daoProduto.validarProdutoUpdate(nome, id)) {
-					request.setAttribute("mensagem",
-							"Já existe um produto com esse nome! Tente atualizar com um nome de produto diferente");
+					request.setAttribute("mensagem", "Já existe um produto com esse nome! Tente atualizar com um nome de produto diferente");
 					request.setAttribute("product", produto);
 
 				} else {
+					
 					daoProduto.atualizar(produto);
+					
 					request.setAttribute("mensagem", "Produto atualizado com sucesso");
 				}
 
