@@ -30,7 +30,7 @@
 			<form action="salvarUsuario" method="post" id="formUser"
 				onsubmit="return validarCampos()? true : false;"
 				enctype="multipart/form-data">
-				<table>
+				<table class="table">
 					<tr>
 						<td>Código</td>
 						<td><input type="text" readonly="readonly" id="id" name="id"
@@ -232,6 +232,19 @@
 				</table>
 			</form>
 		</div>
+		
+		<div class="form-style-11">
+		<h3>Pesquisa de usuários</h3>
+				<form action="servletPesquisa" method="post" id="formPesquisaUser">
+					<table>
+						<tr>
+							<td>Descrição</td>
+							<td><input type="text" id="descricao_consulta" name="descricaoConsulta"></td>
+							<td><input type="submit" value="pesquisar"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
 	</div>
 
 

@@ -51,12 +51,30 @@ public class DaoUsuario {
 		}
 
 	}
-
+	
+	
+	/*
+	 * Método que recebe um parâmetro para realizar a consulta de usuario. Esse parâmetro virá pela servlet, esta que
+	 * pegará esse valor pelo request na tela.
+	 */	
+	
+	public ArrayList<BeanCursoJsp> listar(String descricaoConsulta) throws SQLException{
+		String sql = "select * from usuario where login <> 'admin' and nome like '%"+descricaoConsulta+"%'" ; // Monto a sql
+		return consultarUsuarios(sql);// Retorno a lista com os dados;
+	}
+	
+	
+	/*
+	 * Método que NÃO recebe parâmetros. Ele listará todos os usuários, menos os que forem == admin
+	 */	
 	public ArrayList<BeanCursoJsp> listarTodos() throws Exception {
-		ArrayList<BeanCursoJsp> listar = new ArrayList<BeanCursoJsp>();// Instancio uma lista de objetos BeanCurso
-
 		String sql = "select * from usuario where login <> 'admin'"; // Monto a sql
+		return consultarUsuarios(sql);// Retorno a lista com os dados;
 
+	}
+
+	private ArrayList<BeanCursoJsp> consultarUsuarios( String sql) throws SQLException {
+		ArrayList<BeanCursoJsp> listar = new ArrayList<BeanCursoJsp>();// Instancio uma lista de objetos BeanCurso
 		PreparedStatement list = connection.prepareStatement(sql); // preparo a sql e mando para o "list";
 		ResultSet resultSet = list.executeQuery();// ResultSet é o resultado da query; Executo o sql e guardo no
 													// resultset;
@@ -89,8 +107,8 @@ public class DaoUsuario {
 			listar.add(beanCursoJsp); // Adiciono o objeto com os daodos já setados na lista.
 
 		}
-		return listar; // Retorno a lista com os dados;
-
+		return listar;
+		
 	}
 
 	public void delete(String id) {
