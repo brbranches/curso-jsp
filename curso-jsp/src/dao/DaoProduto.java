@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.BeanCategoria;
 import beans.BeanProduto;
 import connection.SingleConnection;
 
@@ -54,6 +55,28 @@ public class DaoProduto {
 			listar.add(beanProduto);
 		}
 		return listar;
+	}
+	
+	
+	public ArrayList<BeanCategoria> listaCategorias() throws Exception{
+		
+		ArrayList<BeanCategoria> listaCategorias = new ArrayList<BeanCategoria>();
+		
+		String sql = "select * from categoria";
+		
+		PreparedStatement list = connection.prepareStatement(sql);
+		
+		ResultSet resultSet = list.executeQuery();
+		
+		while (resultSet.next()) {
+			BeanCategoria beanCategoria = new BeanCategoria();
+			beanCategoria.setId(resultSet.getLong("id"));
+			beanCategoria.setNome(resultSet.getString("nome"));
+			
+			listaCategorias.add(beanCategoria);
+		}
+		
+		return listaCategorias;
 	}
 
 	public void delete(String id) {

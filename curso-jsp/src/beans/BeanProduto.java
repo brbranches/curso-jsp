@@ -6,6 +6,9 @@ public class BeanProduto {
 	private String nome;
 	private double quantidade;
 	private double preco;
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
