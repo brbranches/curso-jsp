@@ -61,12 +61,21 @@
 					</tr>
 
 					<tr>
+
+
 						<td>Categoria</td>
-						<td><select id="categorias" name="categoria_id">
+						<td>
+							<select id="categorias" name="categoria_id">
 								<C:forEach items="${categorias}" var="categ">
-									<option value="${categ.id}" id="${categ.id}">${categ.nome}</option>
+									<option value="${categ.id}" id="${categ.id}"
+										<C:if test="${categ.id == product.categoria_id}">
+										<C:out value="selected=selected" />
+									</C:if>>
+										${categ.nome}
+									</option>
 								</C:forEach>
-						</select></td>
+							</select>
+						</td>
 					</tr>
 
 					<tr>

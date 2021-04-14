@@ -40,6 +40,7 @@ public class ProdutoServlet extends HttpServlet {
 			} else if (acao.equalsIgnoreCase("editar")) {
 				BeanProduto beanProduto = daoProduto.consultar(product);
 				request.setAttribute("product", beanProduto);
+				request.setAttribute("categorias", daoProduto.listaCategorias());
 
 			} else if (acao.equalsIgnoreCase("listar")) {
 				request.setAttribute("produtos", daoProduto.listarTodos());
